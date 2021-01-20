@@ -12046,6 +12046,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
         public void testExtensionAlias() throws Exception {
             runTest("compiler/testData/codegen/box/fir/ExtensionAlias.kt");
         }
+
+        @TestMetadata("SuspendExtension.kt")
+        public void testSuspendExtension() throws Exception {
+            runTest("compiler/testData/codegen/box/fir/SuspendExtension.kt");
+        }
     }
 
     @TestMetadata("compiler/testData/codegen/box/fullJdk")
