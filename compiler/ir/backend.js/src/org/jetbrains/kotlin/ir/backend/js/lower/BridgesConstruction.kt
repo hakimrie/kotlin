@@ -13,6 +13,7 @@ import org.jetbrains.kotlin.backend.common.lower.*
 import org.jetbrains.kotlin.descriptors.Modality
 import org.jetbrains.kotlin.ir.UNDEFINED_OFFSET
 import org.jetbrains.kotlin.ir.backend.js.JsCommonBackendContext
+import org.jetbrains.kotlin.ir.backend.js.JsIrBackendContext
 import org.jetbrains.kotlin.ir.backend.js.JsLoweredDeclarationOrigin
 import org.jetbrains.kotlin.ir.backend.js.utils.hasStableJsName
 import org.jetbrains.kotlin.ir.backend.js.utils.realOverrideTarget
@@ -116,7 +117,7 @@ abstract class BridgesConstruction(val context: JsCommonBackendContext) : Declar
     ): IrFunction {
 
         val origin =
-            if (bridge.hasStableJsName())
+            if (bridge.hasStableJsName(context as? JsIrBackendContext))
                 JsLoweredDeclarationOrigin.BRIDGE_WITH_STABLE_NAME
             else
                 JsLoweredDeclarationOrigin.BRIDGE_WITHOUT_STABLE_NAME
