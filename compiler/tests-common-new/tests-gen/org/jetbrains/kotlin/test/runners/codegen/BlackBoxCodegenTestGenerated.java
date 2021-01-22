@@ -4907,12 +4907,6 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
         }
 
         @Test
-        @TestMetadata("sealedInSameFile.kt")
-        public void testSealedInSameFile() throws Exception {
-            runTest("compiler/testData/codegen/box/classes/sealedInSameFile.kt");
-        }
-
-        @Test
         @TestMetadata("selfcreate.kt")
         public void testSelfcreate() throws Exception {
             runTest("compiler/testData/codegen/box/classes/selfcreate.kt");
@@ -34673,6 +34667,12 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
         }
 
         @Test
+        @TestMetadata("delegatingConstructor.kt")
+        public void testDelegatingConstructor() throws Exception {
+            runTest("compiler/testData/codegen/box/sealed/delegatingConstructor.kt");
+        }
+
+        @Test
         @TestMetadata("multipleFiles_enabled.kt")
         public void testMultipleFiles_enabled() throws Exception {
             runTest("compiler/testData/codegen/box/sealed/multipleFiles_enabled.kt");
@@ -34682,6 +34682,12 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
         @TestMetadata("objects.kt")
         public void testObjects() throws Exception {
             runTest("compiler/testData/codegen/box/sealed/objects.kt");
+        }
+
+        @Test
+        @TestMetadata("sealedInSameFile.kt")
+        public void testSealedInSameFile() throws Exception {
+            runTest("compiler/testData/codegen/box/sealed/sealedInSameFile.kt");
         }
 
         @Test

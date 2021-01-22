@@ -1,5 +1,7 @@
 // !LANGUAGE: +InlineClasses
 
+// TODO investigate declaration sorting issue in BytecodeListingTextCollectingVisitor::text
+
 annotation class Ann
 
 inline class Z(val x: Int)

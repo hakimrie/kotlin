@@ -210,11 +210,27 @@ internal class SyntheticAccessorLowering(val context: JvmBackendContext) : IrEle
     }
 
     private val IrConstructor.isOrShouldBeHidden: Boolean
-        get() = this in context.hiddenConstructors || (
-                !DescriptorVisibilities.isPrivate(visibility) && !constructedClass.isInline && hasMangledParameters &&
-                        origin != IrDeclarationOrigin.FUNCTION_FOR_DEFAULT_PARAMETER &&
-                        origin != JvmLoweredDeclarationOrigin.SYNTHETIC_ACCESSOR &&
-                        origin != JvmLoweredDeclarationOrigin.SYNTHETIC_ACCESSOR_FOR_HIDDEN_CONSTRUCTOR)
+        get() {
+            if (this in context.hiddenConstructors)
+                return true
+
+            if (origin == IrDeclarationOrigin.FUNCTION_FOR_DEFAULT_PARAMETER ||
+                origin == JvmLoweredDeclarationOrigin.SYNTHETIC_ACCESSOR ||
+                origin == JvmLoweredDeclarationOrigin.SYNTHETIC_ACCESSOR_FOR_HIDDEN_CONSTRUCTOR
+            ) {
+                return false
+            }
+
+            val constructedClass = constructedClass
+
+            if (!DescriptorVisibilities.isPrivate(visibility) && !constructedClass.isInline && hasMangledParameters)
+                return true
+
+            if (constructedClass.modality == Modality.SEALED)
+                return true
+
+            return false
+        }
 
     private fun handleHiddenConstructor(declaration: IrConstructor): IrConstructor {
         require(declaration.isOrShouldBeHidden, declaration::render)
